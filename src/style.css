@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  color: #333;
+  font-family: 'Lato', sans-serif;
+  height: 100vh;
+  position: relative;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Poppins', sans-serif;
+}
+
+.blur-effect {
+  filter: blur(0.7rem);
+}
+
+.btn {
+  padding: 2rem 4rem;
+  border: none;
+  border-radius: 0.4rem;
+  color: #fff;
+  font-size: 1.6rem;
+}
+
+.stop {
+  background-color: #e74c3c;
+}
+
+.continue {
+  background-color: #2ecc71;
+}
+
+.container {
+  height: 100vh;
+  z-index: 1;
+}
+
+header {
+  height: 10%;
+  padding: 3rem;
+  text-align: center;
+  text-decoration: underline;
+}
+
+main {
+  height: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game {
+  display: grid;
+  grid-template-columns: 10rem 10rem 10rem 10rem 10rem 10rem 10rem;
+  grid-template-rows: 2rem 10rem 10rem 10rem 10rem 10rem 10rem;
+  grid-gap: 0.2rem;
+}
+
+.game .start-piece {
+  height: 2rem;
+  background-size: cover;
+}
+
+.game .case {
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.case .piece {
+  margin: auto;
+  background: #fff;
+  border-radius: 50%;
+  height: 6rem;
+  width: 6rem;
+}
+
+.piece.red {
+  background: #e74c3c;
+}
+
+.piece.green {
+  background: #2ecc71;
+}
+
+.red-turn {
+  background: center no-repeat url('/src/img/fRouge.jpg');
+}
+
+.green-turn {
+  background: center no-repeat url('/src/img/fVerte.jpg');
+}
+
+.calc {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  padding: 10rem;
+  height: 40rem;
+  width: 52rem;
+  border-radius: 3rem;
+  background-color: #fff;
+}
+
+.modal > h3 {
+  text-align: center;
+  font-size: 2.5rem;
+  padding-bottom: 5rem;
+}
+
+.modal .btn-container {
+  display: flex;
+  justify-content: space-between;
+}
