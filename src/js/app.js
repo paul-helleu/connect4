@@ -1,5 +1,10 @@
 import '../style.css';
 import openModal from './modals';
+import icon from '../img/connect4-icon.gif';
+
+// initial animated icon
+const fav = document.querySelector('link[rel="icon"]');
+fav.href = icon;
 
 const columnElements = document.querySelectorAll('.start-piece');
 const pieceElements = document.querySelectorAll('.piece');
@@ -15,29 +20,139 @@ const nbPieceArr = [0, 0, 0, 0, 0, 0, 0];
 // dry functions required
 const columnsPiecesArr = () => {
   const newArr = [[], [], [], [], [], [], []];
-  let ite = 0;
+  let col = 0;
 
   for (let i = 0; i < newArr.length * 6; i++) {
-    if (ite === newArr.length) {
-      ite = 0;
+    if (col === newArr.length) {
+      col = 0;
     }
-    newArr[ite].push(pieceArr[i]);
+    newArr[col].push(pieceArr[i]);
 
-    ite++;
+    col++;
   }
   return newArr;
 };
 
 const rowsPiecesArr = () => {
   const newArr = [[], [], [], [], [], []];
-  let r = 0;
+  let row = 0;
 
   for (let i = 0; i < newArr.length * 7; i++) {
     if (!(i % 7)) {
-      r++;
+      row++;
     }
-    newArr[r - 1].push(pieceArr[i]);
+    newArr[row - 1].push(pieceArr[i]);
   }
+  return newArr;
+};
+
+const diagonalsPiecesArr1 = () => {
+  const newArr = [[], [], [], [], [], []];
+  let row = 2;
+  let col = 0;
+  // fonction dry
+
+  for (let i = 0; i < 4; i++) {
+    newArr[0].push(columnsPiecesArr()[col][row]);
+    row++;
+    col++;
+  }
+
+  row = 1;
+  col = 0;
+  for (let i = 0; i < 5; i++) {
+    newArr[1].push(columnsPiecesArr()[col][row]);
+    row++;
+    col++;
+  }
+
+  row = 0;
+  col = 0;
+  for (let i = 0; i < 6; i++) {
+    newArr[2].push(columnsPiecesArr()[col][row]);
+    row++;
+    col++;
+  }
+
+  row = 0;
+  col = 1;
+  for (let i = 0; i < 6; i++) {
+    newArr[3].push(columnsPiecesArr()[col][row]);
+    row++;
+    col++;
+  }
+
+  row = 0;
+  col = 2;
+  for (let i = 0; i < 5; i++) {
+    newArr[4].push(columnsPiecesArr()[col][row]);
+    row++;
+    col++;
+  }
+
+  row = 0;
+  col = 3;
+  for (let i = 0; i < 4; i++) {
+    newArr[5].push(columnsPiecesArr()[col].reverse()[row]);
+    row++;
+    col++;
+  }
+
+  return newArr;
+};
+
+const diagonalsPiecesArr2 = () => {
+  const newArr = [[], [], [], [], [], []];
+  let row = 2;
+  let col = 6;
+  // fonction dry
+
+  for (let i = 0; i < 4; i++) {
+    newArr[0].push(columnsPiecesArr()[col][row]);
+    row++;
+    col--;
+  }
+
+  row = 1;
+  col = 6;
+  for (let i = 0; i < 5; i++) {
+    newArr[1].push(columnsPiecesArr()[col][row]);
+    row++;
+    col--;
+  }
+
+  row = 0;
+  col = 6;
+  for (let i = 0; i < 6; i++) {
+    newArr[2].push(columnsPiecesArr()[col][row]);
+    row++;
+    col--;
+  }
+
+  row = 0;
+  col = 5;
+  for (let i = 0; i < 6; i++) {
+    newArr[3].push(columnsPiecesArr()[col][row]);
+    row++;
+    col--;
+  }
+
+  row = 0;
+  col = 4;
+  for (let i = 0; i < 5; i++) {
+    newArr[4].push(columnsPiecesArr()[col][row]);
+    row++;
+    col--;
+  }
+
+  row = 0;
+  col = 3;
+  for (let i = 0; i < 4; i++) {
+    newArr[5].push(columnsPiecesArr()[col].reverse()[row]);
+    row++;
+    col--;
+  }
+
   return newArr;
 };
 
@@ -48,6 +163,7 @@ let playerTurn = 1;
 const winCondition = () => {
   let winConditionVertical = 0;
   let winConditionHorizontal = 0;
+  let winConditionDiagonal1 = 0;
 
   columnsPiecesArr().map((columnArr) => {
     columnArr.map((arr) => {
@@ -56,7 +172,9 @@ const winCondition = () => {
         if (winConditionVertical === 4) {
           openModal(
             `Le joueur ${
-              playerTurn === 1 ? 'Rouge' : 'Vert'
+              playerTurn === 1
+                ? '<span class="red">Rouge</span>'
+                : '<span class="green">Vert</span>'
             } gagne la partie avec un alignement vertical !`,
           );
         }
@@ -73,7 +191,9 @@ const winCondition = () => {
         if (winConditionHorizontal === 4) {
           openModal(
             `Le joueur ${
-              playerTurn === 1 ? 'Rouge' : 'Vert'
+              playerTurn === 1
+                ? '<span class="red">Rouge</span>'
+                : '<span class="green">Vert</span>'
             } gagne la partie avec un alignement horizontal !`,
           );
         }
@@ -83,32 +203,45 @@ const winCondition = () => {
     });
   });
 
-  // formatArr.map((columnsArr) => {
-  //   columnsArr.map((arr) => {
-  //     // vertical condition
-  //     if (arr[2] === playerTurn) {
-  //       winConditionVertical += 1;
-  //       if (winConditionVertical === 4) {
-  //         openModal(
-  //           `Le joueur ${
-  //             playerTurn === 1 ? 'Rouge' : 'Vert'
-  //           } gagne la partie avec un alignement vertical !`,
-  //         );
-  //       }
-  //     } else {
-  //       winConditionVertical = 0;
-  //     }
+  diagonalsPiecesArr1().map((diagArr) => {
+    console.log(columnsPiecesArr());
+    diagArr.map((arr) => {
+      if (arr[2] === playerTurn) {
+        winConditionDiagonal1 += 1;
+        if (winConditionDiagonal1 === 4) {
+          openModal(
+            `Le joueur ${
+              playerTurn === 1
+                ? '<span class="red">Rouge</span>'
+                : '<span class="green">Vert</span>'
+            } gagne la partie avec un alignement diagonale !`,
+          );
+        }
+      } else {
+        winConditionDiagonal1 = 0;
+      }
+    });
+  });
 
-  //     // horizontal condition
-  //     // [[1, 6, 2]] [[2, 6, 2]]
-
-  //     // console.log(arr[2]);
-  //   });
-  // });
-
-  // comparaison du tableau
-  // diagonale => vérification de l'autre column avec l'index supérieur ou inférieur
-  // horizontale => index de column égale column de l'index supérieur ou inférieur
+  diagonalsPiecesArr2().map((diagArr) => {
+    console.log(columnsPiecesArr());
+    diagArr.map((arr) => {
+      if (arr[2] === playerTurn) {
+        winConditionDiagonal1 += 1;
+        if (winConditionDiagonal1 === 4) {
+          openModal(
+            `Le joueur ${
+              playerTurn === 1
+                ? '<span class="red">Rouge</span>'
+                : '<span class="green">Vert</span>'
+            } gagne la partie avec un alignement diagonale !`,
+          );
+        }
+      } else {
+        winConditionDiagonal1 = 0;
+      }
+    });
+  });
 };
 
 const changeCSSClass = () => {
@@ -147,11 +280,11 @@ const addPiece = (column) => {
   if (nbPieceArr[column - 1] === 6) {
     openModal('Vous ne pouvez pas ajouter de pièce ici !');
     return null;
-    // openmodal de réinitialisation du jeu ou annuler le coup, second paramètre contient le texte à afficher dans les boutons
+    // openmodal de réinitialisation du jeu ou annuler le coup,
+    // second paramètre contient le texte à afficher dans les boutons
   }
   nbPieceArr[column - 1] += 1;
 
-  console.log(columnsPiecesArr()[column - 1][nbPieceArr[column - 1] - 1]);
   columnsPiecesArr()[column - 1][nbPieceArr[column - 1] - 1][2] = playerTurn;
   const row = nbPieceArr[column - 1];
 

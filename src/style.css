@@ -107,6 +107,16 @@ main {
   background: center no-repeat url('/src/img/fVerte.jpg');
 }
 
+.red {
+  font-weight: 700;
+  color: #e74c3c;
+}
+
+.green {
+  font-weight: 700;
+  color: #2ecc71;
+}
+
 .calc {
   position: absolute;
   top: 0;
