@@ -164,9 +164,16 @@ const winCondition = () => {
   let winConditionVertical = 0;
   let winConditionHorizontal = 0;
   let winConditionDiagonal1 = 0;
+  let winConditionDiagonal2 = 0;
 
   columnsPiecesArr().map((columnArr) => {
+    let ite = 0;
     columnArr.map((arr) => {
+      ite += 1;
+      if (ite === 6) {
+        winConditionVertical = 0;
+        ite = 0;
+      }
       if (arr[2] === playerTurn) {
         winConditionVertical += 1;
         if (winConditionVertical === 4) {
@@ -176,6 +183,8 @@ const winCondition = () => {
                 ? '<span class="red">Rouge</span>'
                 : '<span class="green">Vert</span>'
             } gagne la partie avec un alignement vertical !`,
+            'save',
+            0,
           );
         }
       } else {
@@ -185,9 +194,16 @@ const winCondition = () => {
   });
 
   rowsPiecesArr().map((rowArr) => {
+    let ite = 0;
     rowArr.map((arr) => {
+      ite += 1;
+      if (ite === 7) {
+        winConditionHorizontal = 0;
+        ite = 0;
+      }
       if (arr[2] === playerTurn) {
         winConditionHorizontal += 1;
+
         if (winConditionHorizontal === 4) {
           openModal(
             `Le joueur ${
@@ -195,6 +211,8 @@ const winCondition = () => {
                 ? '<span class="red">Rouge</span>'
                 : '<span class="green">Vert</span>'
             } gagne la partie avec un alignement horizontal !`,
+            'save',
+            1,
           );
         }
       } else {
@@ -204,7 +222,6 @@ const winCondition = () => {
   });
 
   diagonalsPiecesArr1().map((diagArr) => {
-    console.log(columnsPiecesArr());
     diagArr.map((arr) => {
       if (arr[2] === playerTurn) {
         winConditionDiagonal1 += 1;
@@ -215,6 +232,8 @@ const winCondition = () => {
                 ? '<span class="red">Rouge</span>'
                 : '<span class="green">Vert</span>'
             } gagne la partie avec un alignement diagonale !`,
+            'save',
+            0,
           );
         }
       } else {
@@ -224,21 +243,22 @@ const winCondition = () => {
   });
 
   diagonalsPiecesArr2().map((diagArr) => {
-    console.log(columnsPiecesArr());
     diagArr.map((arr) => {
       if (arr[2] === playerTurn) {
-        winConditionDiagonal1 += 1;
-        if (winConditionDiagonal1 === 4) {
+        winConditionDiagonal2 += 1;
+        if (winConditionDiagonal2 === 4) {
           openModal(
             `Le joueur ${
               playerTurn === 1
                 ? '<span class="red">Rouge</span>'
                 : '<span class="green">Vert</span>'
             } gagne la partie avec un alignement diagonale !`,
+            'save',
+            0,
           );
         }
       } else {
-        winConditionDiagonal1 = 0;
+        winConditionDiagonal2 = 0;
       }
     });
   });
@@ -277,9 +297,11 @@ const changePlayerTurn = () => {
 };
 
 const addPiece = (column) => {
+  if (nbPieceArr.join('') === '6666666') {
+    openModal('Vous avez remplit de pièces tout le tableau !', '', 1);
+  }
   if (nbPieceArr[column - 1] === 6) {
-    openModal('Vous ne pouvez pas ajouter de pièce ici !');
-    return null;
+    openModal('Vous ne pouvez pas ajouter de pièce ici !', '', 1);
     // openmodal de réinitialisation du jeu ou annuler le coup,
     // second paramètre contient le texte à afficher dans les boutons
   }

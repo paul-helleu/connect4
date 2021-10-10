@@ -18,10 +18,7 @@ body {
 
 h1,
 h2,
-h3,
-h4,
-h5,
-h6 {
+h3 {
   font-family: 'Poppins', sans-serif;
 }
 
@@ -30,6 +27,7 @@ h6 {
 }
 
 .btn {
+  cursor: pointer;
   padding: 2rem 4rem;
   border: none;
   border-radius: 0.4rem;
@@ -37,12 +35,17 @@ h6 {
   font-size: 1.6rem;
 }
 
-.stop {
-  background-color: #e74c3c;
+.primary {
+  background-color: #3498db;
 }
 
 .continue {
   background-color: #2ecc71;
+}
+
+i.far,
+i.fas {
+  font-size: 2rem;
 }
 
 .container {
@@ -132,7 +135,7 @@ main {
 .modal {
   padding: 10rem;
   height: 40rem;
-  width: 52rem;
+  width: 60rem;
   border-radius: 3rem;
   background-color: #fff;
 }
@@ -146,4 +149,9 @@ main {
 .modal .btn-container {
   display: flex;
   justify-content: space-between;
+}
+
+.modal .btn-container-flex {
+  display: flex;
+  justify-content: center;
 }
