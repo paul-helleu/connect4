@@ -1,2 +1,6 @@
-- faire les condition de victoire d'alignement horizontal et diagonale
+Conditions
+- faire les mêmes condition que pour les diagonales pour les alignement verticaux et horizontaux
+- faire une fonction dry regroupant toutes les conditions d'alignement
+
+Sauvegarde :
 - ajouter fichier de configuration csv pour rejouer un moment d'un partie qui contient [nbPieceArr]

@@ -50,7 +50,7 @@ const diagonalsPiecesArr1 = () => {
   const newArr = [[], [], [], [], [], []];
   let row = 2;
   let col = 0;
-  // fonction dry
+  // revoir fonction pour faire fonction dry
 
   for (let i = 0; i < 4; i++) {
     newArr[0].push(columnsPiecesArr()[col][row]);
@@ -93,7 +93,7 @@ const diagonalsPiecesArr1 = () => {
   row = 0;
   col = 3;
   for (let i = 0; i < 4; i++) {
-    newArr[5].push(columnsPiecesArr()[col].reverse()[row]);
+    newArr[5].push(columnsPiecesArr()[col][row]);
     row++;
     col++;
   }
@@ -148,7 +148,7 @@ const diagonalsPiecesArr2 = () => {
   row = 0;
   col = 3;
   for (let i = 0; i < 4; i++) {
-    newArr[5].push(columnsPiecesArr()[col].reverse()[row]);
+    newArr[5].push(columnsPiecesArr()[col][row]);
     row++;
     col--;
   }
@@ -297,23 +297,35 @@ const changePlayerTurn = () => {
 };
 
 const addPiece = (column) => {
-  if (nbPieceArr.join('') === '6666666') {
-    openModal('Vous avez remplit de pièces tout le tableau !', '', 1);
-  }
+  let max;
+
   if (nbPieceArr[column - 1] === 6) {
-    openModal('Vous ne pouvez pas ajouter de pièce ici !', '', 1);
+    openModal('Vous ne pouvez pas ajouter de pièce ici !', '', true);
     // openmodal de réinitialisation du jeu ou annuler le coup,
     // second paramètre contient le texte à afficher dans les boutons
   }
+
   nbPieceArr[column - 1] += 1;
 
-  columnsPiecesArr()[column - 1][nbPieceArr[column - 1] - 1][2] = playerTurn;
+  if (nbPieceArr.join('') === '6666666') {
+    openModal('Vous avez remplit de pièces tout le tableau !', '', true);
+    return null;
+  }
+
+  if (columnsPiecesArr()[column - 1][nbPieceArr[column - 1] - 1] != undefined) {
+    columnsPiecesArr()[column - 1][nbPieceArr[column - 1] - 1][2] = playerTurn;
+    max = false;
+  } else {
+    max = true;
+  }
   const row = nbPieceArr[column - 1];
 
   changeCSSClass();
   winCondition();
   displayPiece(column, row);
-  changePlayerTurn();
+  if (!max) {
+    changePlayerTurn();
+  }
 };
 
 columnElements.forEach((column) => {

@@ -6,6 +6,8 @@ const calc = () => {
 };
 
 const modal = (word, secondBtn, complete) => {
+  const container = document.querySelector('.container');
+
   const m = document.createElement('div');
   m.className = 'modal';
   m.innerHTML = `<h3>${word}</h3>`;
@@ -15,7 +17,6 @@ const modal = (word, secondBtn, complete) => {
   firstBtnElement.className = 'btn continue';
   firstBtnElement.addEventListener('click', () => {
     try {
-      console.log('Rejouer !');
     } catch (e) {
       console.error(e);
     }
@@ -28,7 +29,8 @@ const modal = (word, secondBtn, complete) => {
   secondBtnElement.className = 'btn primary';
   secondBtnElement.addEventListener('click', () => {
     try {
-      console.log('Sauvegarde !');
+      calcElement.remove();
+      container.classList.remove('blur-effect');
     } catch (e) {
       console.error(e);
     }
@@ -53,7 +55,7 @@ const modal = (word, secondBtn, complete) => {
 
   m.appendChild(complete ? btnContainer : btnContainerFlex);
 
-  document.querySelector('.container').classList.add('blur-effect');
+  container.classList.add('blur-effect');
 
   calcElement.appendChild(m);
   document.body.appendChild(calcElement);
