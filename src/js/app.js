@@ -8,7 +8,8 @@ favicon.href = faviconImg;
 document.head.appendChild(favicon);
 
 // Get elements
-const startPiecesElements = document.querySelectorAll('.start-pieces div');
+const startPieceContainer = document.getElementById('start-pieces');
+const startPiecesElements = startPieceContainer.querySelectorAll('div');
 const allGamePiecesElements = document.querySelectorAll('.cases div');
 
 const gamePiecesTo2DRowArray = () => {
@@ -42,13 +43,24 @@ const randomPlayer = () => {
   return Math.round(Math.random());
 };
 
+const initArrowColor = () => {
+  if (playerTurn) {
+    startPieceContainer.className = 'green-turn';
+    return true;
+  }
+  startPieceContainer.className = 'red-turn';
+};
+
 const gameStack = [6, 6, 6, 6, 6, 6, 6];
 // red: 0 | green: 1
 let playerTurn = randomPlayer();
 
+initArrowColor();
+
 startPiecesElements.forEach((startPiece, index) => {
   startPiece.addEventListener('click', () => {
-    if (gameStack.every((value) => !!value)) {
+    console.log(index);
+    if (gameStack.every((value) => value == 0)) {
       console.log('all columns completed');
       return false;
     }

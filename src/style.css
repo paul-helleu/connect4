@@ -68,13 +68,13 @@ header {
   justify-content: center;
 }
 
-#game .start-pieces {
+#game #start-pieces {
   display: flex;
   justify-content: center;
   width: 100%;
 }
 
-#game .start-pieces div {
+#game #start-pieces div {
   width: 9.5rem;
   height: 2.5rem;
 }
@@ -102,11 +102,11 @@ header {
   background: #2ecc71;
 } */
 
-.red-turn {
+.red-turn div {
   background: center no-repeat url('/src/img/red_arrow.jpg');
 }
 
-.green-turn {
+.green-turn div {
   background: center no-repeat url('/src/img/green_arrow.jpg');
 }
 
