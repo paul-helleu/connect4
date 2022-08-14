@@ -11,20 +11,13 @@ document.head.appendChild(favicon);
 const startPiecesElements = document.querySelectorAll('.start-pieces div');
 const allGamePiecesElements = document.querySelectorAll('.cases div');
 
-startPiecesElements.forEach((startPiece) => {
-  startPiece.addEventListener('click', () => {
-    console.log(startPiece);
-  });
-});
-
 const gamePiecesTo2DRowArray = () => {
   const result = [];
   for (let i = 0; i < 6; i++) {
     const elements = [];
-    const ite = i * 7;
 
     for (let j = 0; j < 7; j++) {
-      elements.push(allGamePiecesElements[ite + j]);
+      elements.push(allGamePiecesElements[i * 7 + j]);
     }
 
     result.push(elements);
@@ -38,14 +31,17 @@ const gamePiecesTo2DColumnArray = () => {
     const elements = [];
 
     for (let j = 0; j < 6; j++) {
-      const ite = j * 7;
-
-      elements.push(allGamePiecesElements[ite + i]);
+      elements.push(allGamePiecesElements[j * 7 + i]);
     }
     result.push(elements);
   }
   return result;
 };
 
-console.log(gamePiecesTo2DRowArray());
-console.log(gamePiecesTo2DColumnArray());
+const gameStack = [5, 5, 5, 5, 5, 5, 5];
+
+startPiecesElements.forEach((startPiece) => {
+  startPiece.addEventListener('click', () => {
+    console.log(startPiece);
+  });
+});
