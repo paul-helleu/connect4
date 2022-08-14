@@ -38,11 +38,17 @@ const gamePiecesTo2DColumnArray = () => {
   return result;
 };
 
+const randomPlayer = () => {
+  return Math.round(Math.random());
+};
+
 const gameStack = [6, 6, 6, 6, 6, 6, 6];
+// red: 0 | green: 1
+let playerTurn = randomPlayer();
 
 startPiecesElements.forEach((startPiece, index) => {
   startPiece.addEventListener('click', () => {
-    if (gameStack.every((value) => value == 0)) {
+    if (gameStack.every((value) => !!value)) {
       console.log('all columns completed');
       return false;
     }
