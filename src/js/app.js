@@ -32,4 +32,20 @@ const gamePiecesTo2DRowArray = () => {
   return result;
 };
 
-console.log(gamePiecesTo2DRowArray(allGamePiecesElements));
+const gamePiecesTo2DColumnArray = () => {
+  const result = [];
+  for (let i = 0; i < 7; i++) {
+    const elements = [];
+
+    for (let j = 0; j < 6; j++) {
+      const ite = j * 7;
+
+      elements.push(allGamePiecesElements[ite + i]);
+    }
+    result.push(elements);
+  }
+  return result;
+};
+
+console.log(gamePiecesTo2DRowArray());
+console.log(gamePiecesTo2DColumnArray());
