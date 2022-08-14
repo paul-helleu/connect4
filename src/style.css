@@ -94,13 +94,13 @@ header {
   width: 6rem;
 }
 
-/* .case div.red {
+div.red {
   background: #e74c3c;
 }
 
-.case div.green {
+div.green {
   background: #2ecc71;
-} */
+}
 
 .red-turn div {
   background: center no-repeat url('/src/img/red_arrow.jpg');

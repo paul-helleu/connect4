@@ -46,7 +46,7 @@ const randomPlayer = () => {
 const initArrowColor = () => {
   if (playerTurn) {
     startPieceContainer.className = 'green-turn';
-    return true;
+    return;
   }
   startPieceContainer.className = 'red-turn';
 };
@@ -59,15 +59,14 @@ initArrowColor();
 
 startPiecesElements.forEach((startPiece, index) => {
   startPiece.addEventListener('click', () => {
-    console.log(index);
     if (gameStack.every((value) => value == 0)) {
       console.log('all columns completed');
-      return false;
+      return;
     }
 
     if (!gameStack[index]) {
       console.log('column', (index + 1).toString(), 'completed');
-      return false;
+      return;
     }
 
     gameStack[index]--;
