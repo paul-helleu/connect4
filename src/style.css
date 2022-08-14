@@ -86,7 +86,7 @@ main {
   justify-content: center;
 }
 
-.case .piece {
+.case div {
   margin: auto;
   background: #fff;
   border-radius: 50%;
@@ -94,11 +94,11 @@ main {
   width: 6rem;
 }
 
-.piece.red {
+.case div.red {
   background: #e74c3c;
 }
 
-.piece.green {
+.case div.green {
   background: #2ecc71;
 }
 
