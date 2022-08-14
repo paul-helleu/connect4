@@ -1,4 +1,5 @@
 import '../style.css';
+import modal from './modals';
 import faviconImg from '../img/connect4-icon.gif';
 
 // Include animated favicon
@@ -68,12 +69,13 @@ initArrowColor();
 startPiecesElements.forEach((startPiece, index) => {
   startPiece.addEventListener('click', () => {
     if (gameStack.every((value) => value == 0)) {
+      modal('All columns are completed, reseting the game !');
       resetGame();
       return;
     }
 
     if (!gameStack[index]) {
-      console.log('column', (index + 1).toString(), 'completed');
+      modal('Column ' + (index + 1).toString() + ' completed');
       return;
     }
 

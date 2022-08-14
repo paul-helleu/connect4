@@ -1,67 +1,40 @@
-let calcElement;
+const container = document.querySelector('.container');
+const calc = document.createElement('div');
+calc.className = 'calc';
 
-const calc = () => {
-  calcElement = document.createElement('div');
-  calcElement.className = 'calc';
-};
+const modal = (sentence) => {
+  const modalElement = document.createElement('div');
+  modalElement.className = 'modal';
 
-const modal = (word, secondBtn, complete) => {
-  const container = document.querySelector('.container');
+  const sentenceElement = document.createElement('h3');
+  sentenceElement.innerHTML = sentence;
 
-  const m = document.createElement('div');
-  m.className = 'modal';
-  m.innerHTML = `<h3>${word}</h3>`;
+  const removeModal = () => {
+    container.classList.remove('blur-effect');
 
-  const firstBtnElement = document.createElement('button');
-  firstBtnElement.innerHTML = `<i class="fas fa-sync-alt></i> Rejouer`;
-  firstBtnElement.className = 'btn continue';
-  firstBtnElement.addEventListener('click', () => {
-    try {
-    } catch (e) {
-      console.error(e);
+    modalElement.remove();
+    calc.remove();
+  };
+
+  const buttonElement = document.createElement('button');
+  buttonElement.className = 'btn continue';
+  buttonElement.innerText = 'Continue';
+  buttonElement.addEventListener('click', () => {
+    removeModal();
+  });
+
+  window.addEventListener('click', (e) => {
+    if (e.target == calc) {
+      removeModal();
     }
   });
 
-  const secondBtnElement = document.createElement('button');
-  secondBtnElement.innerHTML = `<i class="${
-    secondBtn === 'save' ? 'far fa-save' : 'fas fa-arrow-right'
-  }"></i> ${secondBtn === 'save' ? 'Sauvegarder' : 'Continuer'}`;
-  secondBtnElement.className = 'btn primary';
-  secondBtnElement.addEventListener('click', () => {
-    try {
-      calcElement.remove();
-      container.classList.remove('blur-effect');
-    } catch (e) {
-      console.error(e);
-    }
-  });
+  modalElement.append(...[sentenceElement, buttonElement]);
 
-  const btnContainer = document.createElement('div');
-  btnContainer.className = 'btn-container';
-
-  const btnContainerFlex = document.createElement('div');
-  btnContainerFlex.className = 'btn-container-flex';
-
-  if (complete) {
-    btnContainer.append(firstBtnElement, secondBtnElement);
-  } else {
-    btnContainerFlex.appendChild(secondBtnElement);
-  }
-
-  /* window.addEventListener('click', (e) => {
-    e.stopPropagation();
-    calcElement.remove();
-  }); */
-
-  m.appendChild(complete ? btnContainer : btnContainerFlex);
+  calc.appendChild(modalElement);
 
   container.classList.add('blur-effect');
-
-  calcElement.appendChild(m);
-  document.body.appendChild(calcElement);
+  document.body.appendChild(calc);
 };
 
-export default (word) => {
-  calc();
-  modal(word);
-};
+export default modal;

@@ -50,7 +50,6 @@ i.fas {
 
 .container {
   height: 100vh;
-  z-index: 1;
 }
 
 header {
@@ -126,7 +125,6 @@ div.green {
   left: 0;
   height: 100vh;
   width: 100vw;
-  z-index: 2;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -138,20 +136,12 @@ div.green {
   width: 60rem;
   border-radius: 3rem;
   background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .modal > h3 {
-  text-align: center;
   font-size: 2.5rem;
   padding-bottom: 5rem;
-}
-
-.modal .btn-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-.modal .btn-container-flex {
-  display: flex;
-  justify-content: center;
 }
