@@ -40,7 +40,7 @@ const gamePiecesTo2DColumnArray = () => {
 };
 
 const randomPlayer = () => {
-  return Math.round(Math.random());
+  return !!Math.round(Math.random());
 };
 
 const initArrowColor = () => {
@@ -52,7 +52,7 @@ const initArrowColor = () => {
 };
 
 const gameStack = [6, 6, 6, 6, 6, 6, 6];
-// red: 0 | green: 1
+// red: false | green: true
 let playerTurn = randomPlayer();
 
 initArrowColor();
@@ -70,5 +70,10 @@ startPiecesElements.forEach((startPiece, index) => {
     }
 
     gameStack[index]--;
+
+    const gameColumns = gamePiecesTo2DColumnArray();
+    gameColumns[index][gameStack[index]].className = playerTurn ? 'green' : 'red';
+
+    playerTurn = !playerTurn;
   });
 });
