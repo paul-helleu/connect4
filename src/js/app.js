@@ -51,7 +51,15 @@ const initArrowColor = () => {
   startPieceContainer.className = 'red-turn';
 };
 
-const gameStack = [6, 6, 6, 6, 6, 6, 6];
+const resetGame = () => {
+  allGamePiecesElements.forEach((element) => {
+    element.classList = '';
+  });
+
+  gameStack = [6, 6, 6, 6, 6, 6, 6];
+};
+
+let gameStack = [6, 6, 6, 6, 6, 6, 6];
 // red: false | green: true
 let playerTurn = randomPlayer();
 
@@ -60,7 +68,7 @@ initArrowColor();
 startPiecesElements.forEach((startPiece, index) => {
   startPiece.addEventListener('click', () => {
     if (gameStack.every((value) => value == 0)) {
-      console.log('all columns completed');
+      resetGame();
       return;
     }
 
@@ -75,5 +83,6 @@ startPiecesElements.forEach((startPiece, index) => {
     gameColumns[index][gameStack[index]].className = playerTurn ? 'green' : 'red';
 
     playerTurn = !playerTurn;
+    initArrowColor();
   });
 });
