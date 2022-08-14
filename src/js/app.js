@@ -9,9 +9,12 @@ document.head.appendChild(favicon);
 
 // Get elements
 const startPiecesElements = document.querySelectorAll('.start-pieces div');
+const allGamePiecesElements = document.querySelectorAll('.cases div');
 
 startPiecesElements.forEach((startPiece) => {
   startPiece.addEventListener('click', () => {
     console.log(startPiece);
   });
 });
+
+
