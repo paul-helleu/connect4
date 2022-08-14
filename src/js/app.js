@@ -38,10 +38,10 @@ const gamePiecesTo2DColumnArray = () => {
   return result;
 };
 
-const gameStack = [5, 5, 5, 5, 5, 5, 5];
+const gameStack = [6, 6, 6, 6, 6, 6, 6];
 
-startPiecesElements.forEach((startPiece) => {
+startPiecesElements.forEach((startPiece, index) => {
   startPiece.addEventListener('click', () => {
-    console.log(startPiece);
+    gameStack[index]--;
   });
 });
