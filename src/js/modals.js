@@ -17,7 +17,7 @@ const modal = (sentence) => {
   };
 
   const buttonElement = document.createElement('button');
-  buttonElement.className = 'btn continue';
+  buttonElement.className = 'btn primary';
   buttonElement.innerText = 'Continue';
   buttonElement.addEventListener('click', () => {
     removeModal();

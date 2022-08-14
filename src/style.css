@@ -39,15 +39,6 @@ h3 {
   background-color: #3498db;
 }
 
-.continue {
-  background-color: #2ecc71;
-}
-
-i.far,
-i.fas {
-  font-size: 2rem;
-}
-
 .container {
   height: 100vh;
 }
@@ -142,6 +133,7 @@ div.green {
 }
 
 .modal > h3 {
+  text-align: center;
   font-size: 2.5rem;
   padding-bottom: 5rem;
 }

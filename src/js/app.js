@@ -60,6 +60,38 @@ const resetGame = () => {
   gameStack = [6, 6, 6, 6, 6, 6, 6];
 };
 
+// Alignment check
+const checkVerticalAlignment = () => {
+  const gameColumns = gamePiecesTo2DColumnArray();
+
+  for (let i = 0; i < 7; i++) {
+    let greenAcc = 0;
+    let redAcc = 0;
+
+    for (let j = 0; j < 6; j++) {
+      if (gameColumns[i][j].className == 'green') {
+        greenAcc++;
+      } else {
+        greenAcc = 0;
+      }
+
+      if (gameColumns[i][j].className == 'red') {
+        redAcc++;
+      } else {
+        redAcc = 0;
+      }
+
+      if (greenAcc == 4) {
+        return 1;
+      }
+
+      if (redAcc == 4) {
+        return 0;
+      }
+    }
+  }
+};
+
 let gameStack = [6, 6, 6, 6, 6, 6, 6];
 // red: false | green: true
 let playerTurn = randomPlayer();
@@ -83,6 +115,18 @@ startPiecesElements.forEach((startPiece, index) => {
 
     const gameColumns = gamePiecesTo2DColumnArray();
     gameColumns[index][gameStack[index]].className = playerTurn ? 'green' : 'red';
+
+    const vertical = checkVerticalAlignment();
+
+    if (vertical == 0 || vertical == 1) {
+      console.log({ vertical, playerTurn });
+
+      modal(
+        (playerTurn ? '<span class="green">GREEN</span>' : '<span class="red">RED</span>') +
+          ' wins with vertical alignment !',
+      );
+      resetGame();
+    }
 
     playerTurn = !playerTurn;
     initArrowColor();
