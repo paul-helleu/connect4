@@ -42,6 +42,16 @@ const gameStack = [6, 6, 6, 6, 6, 6, 6];
 
 startPiecesElements.forEach((startPiece, index) => {
   startPiece.addEventListener('click', () => {
+    if (gameStack.every((value) => value == 0)) {
+      console.log('all columns completed');
+      return false;
+    }
+
+    if (!gameStack[index]) {
+      console.log('column', (index + 1).toString(), 'completed');
+      return false;
+    }
+
     gameStack[index]--;
   });
 });
