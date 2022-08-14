@@ -6,3 +6,12 @@ const favicon = document.createElement('link');
 favicon.rel = 'icon';
 favicon.href = faviconImg;
 document.head.appendChild(favicon);
+
+// Get elements
+const startPiecesElements = document.querySelectorAll('.start-pieces div');
+
+startPiecesElements.forEach((startPiece) => {
+  startPiece.addEventListener('click', () => {
+    console.log(startPiece);
+  });
+});
