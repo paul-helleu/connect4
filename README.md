@@ -11,5 +11,5 @@
 ##### Objectifs:
 
 - [x] condition d'alignement des pièces en position vertical.
-- [] condition d'alignement des pièces en position horizontal.
-- [] conditions d'alignement des pièces des différentes directions en position diagonal.
+- [x] condition d'alignement des pièces en position horizontal.
+- [x] conditions d'alignement des pièces des différentes directions en position diagonal.
