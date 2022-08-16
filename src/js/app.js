@@ -175,6 +175,25 @@ const checkVerticalAlignment = (color) => {
   }
 };
 
+const checkDiagonalAlignment = (color) => {
+  const gameDiagonals = gamePiecesTo2DDiagonalArray();
+
+  for (let i = 0; i < gameDiagonals.length; i++) {
+    let acc = 0;
+    for (let j = 0; j < gameDiagonals[i].length; j++) {
+      if (gameDiagonals[i][j].classList.contains(color)) {
+        acc++;
+      } else {
+        acc = 0;
+      }
+
+      if (acc == 4) {
+        return true;
+      }
+    }
+  }
+};
+
 let gameStack = [6, 6, 6, 6, 6, 6, 6];
 // red: false | green: true
 let playerTurn = randomPlayer();
@@ -216,6 +235,14 @@ startPiecesElements.forEach((startPiece, index) => {
       modal(
         `<span class="${color}">${color.toUpperCase()}</span> wins with horizontal alignment !`,
       );
+      resetGame();
+    }
+
+    // diagonals alignment check
+    const diagonal = checkDiagonalAlignment(color);
+
+    if (diagonal) {
+      modal(`<span class="${color}">${color.toUpperCase()}</span> wins with diagonal alignment !`);
       resetGame();
     }
 
