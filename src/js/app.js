@@ -68,7 +68,27 @@ const checkVerticalAlignment = (color) => {
     let acc = 0;
 
     for (let j = 0; j < 6; j++) {
-      if (gameColumns[i][j].className == color) {
+      if (gameColumns[i][j].classList.contains(color)) {
+        acc++;
+      } else {
+        acc = 0;
+      }
+
+      if (acc == 4) {
+        return true;
+      }
+    }
+  }
+};
+
+const checkHorizontalAlignment = (color) => {
+  const gameRows = gamePiecesTo2DRowArray();
+
+  for (let i = 0; i < 6; i++) {
+    let acc = 0;
+
+    for (let j = 0; j < 7; j++) {
+      if (gameRows[i][j].classList.contains(color)) {
         acc++;
       } else {
         acc = 0;
@@ -104,14 +124,23 @@ startPiecesElements.forEach((startPiece, index) => {
 
     const color = playerTurn ? 'green' : 'red';
 
+    // columns alignment check
     const gameColumns = gamePiecesTo2DColumnArray();
     gameColumns[index][gameStack[index]].className = color;
 
     const vertical = checkVerticalAlignment(color);
 
     if (vertical) {
+      modal(`<span class="${color}">${color.toUpperCase()}</span> wins with vertical alignment !`);
+      resetGame();
+    }
+
+    // rows alignment check
+    const horizontal = checkHorizontalAlignment(color);
+
+    if (horizontal) {
       modal(
-        `<span class="${color}">${color.toUpperCase()}</span>` + ' wins with vertical alignment !',
+        `<span class="${color}">${color.toUpperCase()}</span> wins with horizontal alignment !`,
       );
       resetGame();
     }
