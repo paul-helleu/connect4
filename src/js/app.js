@@ -113,6 +113,7 @@ const gamePiecesTo2DDiagonalArray = () => {
 
     do {
       element.push(allGamePiecesElements[id]);
+
       id += 6;
       ite--;
     } while (ite >= 0);
@@ -137,10 +138,42 @@ const gamePiecesTo2DDiagonalArray = () => {
   }
   // #endregion ( / )
 
-  console.log(result);
-};
+  // #region Diagonal Array ( \ )
+  for (let i = 0; i < 6; i++) {
+    const element = [];
 
-gamePiecesTo2DDiagonalArray();
+    let ite = i,
+      id = 6 - i;
+
+    do {
+      element.push(allGamePiecesElements[id]);
+
+      id += 8;
+      ite--;
+    } while (ite >= 0);
+
+    result.push(element);
+  }
+
+  for (let i = 0; i < 6; i++) {
+    const element = [];
+
+    let ite = i,
+      id = allGamePiecesElements.length - 7;
+
+    do {
+      element.push(allGamePiecesElements[id + i]);
+
+      id -= 8;
+      ite--;
+    } while (ite >= 0);
+
+    result.push(element);
+  }
+  // #endregion ( \ )
+
+  return result;
+};
 
 let gameStack = [6, 6, 6, 6, 6, 6, 6];
 // red: false | green: true
