@@ -101,6 +101,47 @@ const checkHorizontalAlignment = (color) => {
   }
 };
 
+const gamePiecesTo2DDiagonalArray = () => {
+  const result = [];
+
+  // #region Diagonal Array ( / )
+  for (let i = 0; i < 6; i++) {
+    const element = [];
+
+    let ite = i,
+      id = i;
+
+    do {
+      element.push(allGamePiecesElements[id]);
+      id += 6;
+      ite--;
+    } while (ite >= 0);
+
+    result.push(element);
+  }
+
+  for (let i = 0; i < 6; i++) {
+    const element = [];
+
+    let ite = i,
+      id = i;
+
+    do {
+      element.push(allGamePiecesElements[allGamePiecesElements.length - id - 1]);
+
+      id += 6;
+      ite--;
+    } while (ite >= 0);
+
+    result.push(element);
+  }
+  // #endregion ( / )
+
+  console.log(result);
+};
+
+gamePiecesTo2DDiagonalArray();
+
 let gameStack = [6, 6, 6, 6, 6, 6, 6];
 // red: false | green: true
 let playerTurn = randomPlayer();
