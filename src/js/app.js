@@ -102,15 +102,16 @@ startPiecesElements.forEach((startPiece, index) => {
 
     gameStack[index]--;
 
-    const gameColumns = gamePiecesTo2DColumnArray();
-    gameColumns[index][gameStack[index]].className = playerTurn ? 'green' : 'red';
+    const color = playerTurn ? 'green' : 'red';
 
-    const vertical = checkVerticalAlignment(playerTurn ? 'green' : 'red');
+    const gameColumns = gamePiecesTo2DColumnArray();
+    gameColumns[index][gameStack[index]].className = color;
+
+    const vertical = checkVerticalAlignment(color);
 
     if (vertical) {
       modal(
-        (playerTurn ? '<span class="green">GREEN</span>' : '<span class="red">RED</span>') +
-          ' wins with vertical alignment !',
+        `<span class="${color}">${color.toUpperCase()}</span>` + ' wins with vertical alignment !',
       );
       resetGame();
     }
