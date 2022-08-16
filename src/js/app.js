@@ -40,6 +40,80 @@ const gamePiecesTo2DColumnArray = () => {
   return result;
 };
 
+const gamePiecesTo2DDiagonalArray = () => {
+  const result = [];
+
+  // #region Diagonal Array ( / )
+  for (let i = 3; i < 6; i++) {
+    const element = [];
+
+    let ite = i,
+      id = i;
+
+    do {
+      element.push(allGamePiecesElements[id]);
+
+      id += 6;
+      ite--;
+    } while (ite >= 0);
+
+    result.push(element);
+  }
+
+  for (let i = 3; i < 6; i++) {
+    const element = [];
+
+    let ite = i,
+      id = i;
+
+    do {
+      element.push(allGamePiecesElements[allGamePiecesElements.length - id - 1]);
+
+      id += 6;
+      ite--;
+    } while (ite >= 0);
+
+    result.push(element);
+  }
+  // #endregion ( / )
+
+  // #region Diagonal Array ( \ )
+  for (let i = 3; i < 6; i++) {
+    const element = [];
+
+    let ite = i,
+      id = 6 - i;
+
+    do {
+      element.push(allGamePiecesElements[id]);
+
+      id += 8;
+      ite--;
+    } while (ite >= 0);
+
+    result.push(element);
+  }
+
+  for (let i = 3; i < 6; i++) {
+    const element = [];
+
+    let ite = i,
+      id = allGamePiecesElements.length - 7;
+
+    do {
+      element.push(allGamePiecesElements[id + i]);
+
+      id -= 8;
+      ite--;
+    } while (ite >= 0);
+
+    result.push(element);
+  }
+  // #endregion ( \ )
+
+  return result;
+};
+
 const randomPlayer = () => {
   return !!Math.round(Math.random());
 };
@@ -61,26 +135,6 @@ const resetGame = () => {
 };
 
 // Alignment check
-const checkVerticalAlignment = (color) => {
-  const gameColumns = gamePiecesTo2DColumnArray();
-
-  for (let i = 0; i < 7; i++) {
-    let acc = 0;
-
-    for (let j = 0; j < 6; j++) {
-      if (gameColumns[i][j].classList.contains(color)) {
-        acc++;
-      } else {
-        acc = 0;
-      }
-
-      if (acc == 4) {
-        return true;
-      }
-    }
-  }
-};
-
 const checkHorizontalAlignment = (color) => {
   const gameRows = gamePiecesTo2DRowArray();
 
@@ -101,78 +155,24 @@ const checkHorizontalAlignment = (color) => {
   }
 };
 
-const gamePiecesTo2DDiagonalArray = () => {
-  const result = [];
+const checkVerticalAlignment = (color) => {
+  const gameColumns = gamePiecesTo2DColumnArray();
 
-  // #region Diagonal Array ( / )
-  for (let i = 0; i < 6; i++) {
-    const element = [];
+  for (let i = 0; i < 7; i++) {
+    let acc = 0;
 
-    let ite = i,
-      id = i;
+    for (let j = 0; j < 6; j++) {
+      if (gameColumns[i][j].classList.contains(color)) {
+        acc++;
+      } else {
+        acc = 0;
+      }
 
-    do {
-      element.push(allGamePiecesElements[id]);
-
-      id += 6;
-      ite--;
-    } while (ite >= 0);
-
-    result.push(element);
+      if (acc == 4) {
+        return true;
+      }
+    }
   }
-
-  for (let i = 0; i < 6; i++) {
-    const element = [];
-
-    let ite = i,
-      id = i;
-
-    do {
-      element.push(allGamePiecesElements[allGamePiecesElements.length - id - 1]);
-
-      id += 6;
-      ite--;
-    } while (ite >= 0);
-
-    result.push(element);
-  }
-  // #endregion ( / )
-
-  // #region Diagonal Array ( \ )
-  for (let i = 0; i < 6; i++) {
-    const element = [];
-
-    let ite = i,
-      id = 6 - i;
-
-    do {
-      element.push(allGamePiecesElements[id]);
-
-      id += 8;
-      ite--;
-    } while (ite >= 0);
-
-    result.push(element);
-  }
-
-  for (let i = 0; i < 6; i++) {
-    const element = [];
-
-    let ite = i,
-      id = allGamePiecesElements.length - 7;
-
-    do {
-      element.push(allGamePiecesElements[id + i]);
-
-      id -= 8;
-      ite--;
-    } while (ite >= 0);
-
-    result.push(element);
-  }
-  // #endregion ( \ )
-
-  return result;
 };
 
 let gameStack = [6, 6, 6, 6, 6, 6, 6];
