@@ -55,6 +55,7 @@ header {
 
 #game #start-pieces {
   display: flex;
+  justify-content: center;
   width: 100%;
 }
 
@@ -149,5 +150,38 @@ div.green {
     padding: 5rem;
     height: 35rem;
     width: 30rem;
+  }
+}
+
+@media screen and (max-height: 600px) {
+  header {
+    display: none;
+  }
+
+  #game {
+    height: 100vh;
+  }
+
+  #start-pieces {
+    justify-content: space-around !important;
+    background: #000;
+  }
+
+  .cases {
+    height: 100%;
+    width: 100%;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+  }
+
+  .cases div {
+    height: 4rem;
+    width: 4rem;
+  }
+
+  .modal {
+    padding: 5rem;
+    height: 30rem;
+    width: 50rem;
   }
 }
