@@ -13,7 +13,7 @@ body {
   color: #333;
   font-family: 'Lato', sans-serif;
   height: 100vh;
-  position: relative;
+  width: 100%;
 }
 
 h1,
@@ -39,10 +39,6 @@ h3 {
   background-color: #3498db;
 }
 
-.container {
-  height: 100vh;
-}
-
 header {
   height: 10%;
   padding: 3rem;
@@ -59,7 +55,6 @@ header {
 
 #game #start-pieces {
   display: flex;
-  justify-content: center;
   width: 100%;
 }
 
@@ -129,10 +124,30 @@ div.green {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .modal > h3 {
   text-align: center;
   font-size: 2.5rem;
   padding-bottom: 5rem;
+}
+
+@media screen and (max-width: 600px) {
+  .cases {
+    width: 100%;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 7rem);
+  }
+
+  .cases div {
+    height: 4rem;
+    width: 4rem;
+  }
+
+  .modal {
+    padding: 5rem;
+    height: 35rem;
+    width: 30rem;
+  }
 }
