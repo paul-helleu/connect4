@@ -221,28 +221,35 @@ startPiecesElements.forEach((startPiece, index) => {
     const gameColumns = gamePiecesTo2DColumnArray();
     gameColumns[index][gameStack[index]].className = color;
 
+    const alignments = [];
+
     const vertical = checkVerticalAlignment(color);
 
     if (vertical) {
-      modal(`<span class="${color}">${color.toUpperCase()}</span> wins with vertical alignment !`);
-      resetGame();
+      alignments.push('vertical');
     }
 
     // rows alignment check
     const horizontal = checkHorizontalAlignment(color);
 
     if (horizontal) {
-      modal(
-        `<span class="${color}">${color.toUpperCase()}</span> wins with horizontal alignment !`,
-      );
-      resetGame();
+      alignments.push('horizontal');
     }
 
     // diagonals alignment check
     const diagonal = checkDiagonalAlignment(color);
 
     if (diagonal) {
-      modal(`<span class="${color}">${color.toUpperCase()}</span> wins with diagonal alignment !`);
+      alignments.push('diagonal');
+    }
+
+    if (vertical || horizontal || diagonal) {
+      const alignmentText = alignments.map((align) => align);
+      modal(
+        `<span class="${color}">${color.toUpperCase()}</span> wins with ${alignmentText.join(
+          ', ',
+        )} alignment${alignmentText.length > 1 ? 's' : ''} !`,
+      );
       resetGame();
     }
 
